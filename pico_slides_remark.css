@@ -1,0 +1,94 @@
+/* Header/Footer stuff */
+.remark-slide-content {
+	  padding:3em 4em 2em 4em !important;
+}
+
+div.header-wrap {
+    background-color: #eff4f4;
+    border-bottom: 1px solid #a6bcbc;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 60px;
+    width: 100%;
+    padding: 8px 10px;
+    text-align: center;
+}
+
+div.logo-left {
+    width: 13%;
+    text-align: left;
+    float: left;
+}
+
+div.logo-right {
+    width: 13%;
+    text-align: right;
+    float: left;
+}
+
+div.title-warp {
+    width: 72%;
+    float: left;
+}
+
+div.title {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Yanone Kaffeesatz';
+}
+
+div.authors {
+    text-align: center;
+    font-size: 12px;
+}
+
+div.affiliations {
+    text-align: center;
+    font-size: 10px;
+    color: #555;
+    margin-top: 3px;
+}
+
+div.footer-logos {
+    position: absolute;
+    bottom: 30px;
+    left: 0px;
+    height: 35px;
+    width: 100%;
+    text-align: right;
+}
+
+div.footer-logos img {
+    margin-right: 10px;
+}
+
+div.footer-wrap {
+    background-color: #eff4f4;
+    border-top: 1px solid #a6bcbc;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+}
+
+div.footer-wrap ul {
+    padding: 1px 10px;
+    margin: 0;
+    text-align: left;
+}
+
+div.footer-wrap ul li {
+    border: 1px solid #768c8c;
+    border-radius: 5px;
+    font-size: 15px;
+    display: inline-block;
+    padding: 1px 5px;
+    margin-right: 5px;
+}
+
+.current-nav {
+    background-color: #768c8c;
+    color: #fff;
+}
