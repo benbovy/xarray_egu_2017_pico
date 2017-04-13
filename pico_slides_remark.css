@@ -1,11 +1,28 @@
-/* Header/Footer stuff */
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+
+body { font-family: 'Droid Sans'; }
+
+h1, h2, h3 {
+	font-family: 'Merriweather Sans';
+	font-weight: bold;
+	font-size: 35px !important;
+	color: #32445a;
+}
+
+.remark-code, .remark-inline-code {
+	font-family: 'Roboto Mono';
+	font-size: 13px;
+}
+
 .remark-slide-content {
-	  padding:3em 4em 2em 4em !important;
+	  padding:3.7em 4em 2em 4em !important;
 }
 
 div.header-wrap {
-    background-color: #eff4f4;
-    border-bottom: 1px solid #a6bcbc;
+    background-color: #5c7ca4;
+    border-bottom: 1px solid #2c5c84;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -16,47 +33,60 @@ div.header-wrap {
 }
 
 div.logo-left {
-    width: 13%;
+    width: 12%;
     text-align: left;
     float: left;
 }
 
 div.logo-right {
-    width: 13%;
+    width: 12%;
     text-align: right;
     float: left;
 }
 
 div.title-warp {
-    width: 72%;
+    width: 74%;
     float: left;
+		color: #fff;
 }
 
 div.title {
     text-align: center;
-    font-size: 30px;
-    font-family: 'Yanone Kaffeesatz';
+    font-size: 23px;
+    font-family: 'Merriweather Sans';
 }
 
 div.authors {
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
+		margin-top: 2px;
+		color: #e3e9f1;
 }
 
 div.affiliations {
     text-align: center;
-    font-size: 10px;
-    color: #555;
+    font-size: 11px;
+    color: #d0d6de;
     margin-top: 3px;
 }
 
 div.footer-logos {
     position: absolute;
     bottom: 30px;
-    left: 0px;
+    left: 0;
     height: 35px;
     width: 100%;
     text-align: right;
+}
+
+div.footer-logos span {
+	  display: inline-block;
+	  height: 80%;
+		vertical-align: middle;
+		text-align: left;
+    margin: 0 10px 0 0;
+		font-size: 11px;
+		color: #64748c;
 }
 
 div.footer-logos img {
@@ -64,31 +94,33 @@ div.footer-logos img {
 }
 
 div.footer-wrap {
-    background-color: #eff4f4;
-    border-top: 1px solid #a6bcbc;
+    background-color: #5c7ca4;
     position: absolute;
     bottom: 0px;
     left: 0px;
     height: 30px;
     width: 100%;
+		padding: 0;
 }
 
 div.footer-wrap ul {
-    padding: 1px 10px;
+    padding: 0 10px;
     margin: 0;
     text-align: left;
 }
 
 div.footer-wrap ul li {
-    border: 1px solid #768c8c;
-    border-radius: 5px;
     font-size: 15px;
     display: inline-block;
-    padding: 1px 5px;
-    margin-right: 5px;
+    padding: 6px 10px;
+		color: #d0d6de;
 }
 
 .current-nav {
-    background-color: #768c8c;
-    color: #fff;
+    background-color: #d0d6de;
+    color: #32445a !important;
+}
+
+.lightblue {
+	  color: #64748c;
 }

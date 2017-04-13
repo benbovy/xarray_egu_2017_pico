@@ -1,20 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Title</title>
+    <title>Xarray (EGU 2017 PICO)</title>
     <meta charset="utf-8">
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
-      }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-    </style>
     <link rel="stylesheet" type="text/css" href="pico_slides_remark.css"/>
   </head>
   <body>
@@ -36,13 +24,14 @@ layout: true
     <div class='logo-right'></div>
 </div>
 <div class="footer-logos">
+    <span>EGU Vienna 04-2017</span>
     <img src="figs/pydata-logo.png" width="65px"/>
     <img src="figs/numfocus-logo.png" width="65px"/>
 </div>
 <div class="footer-wrap">
     <ul>
-        <li class='current-nav'>Outline</li>
-        <li>Dataset</li>
+        <li class='current-nav'>outline</li>
+        <li>dataset</li>
     </ul>
 </div>
 
@@ -50,17 +39,17 @@ layout: true
 
 # What is xarray?
 
-For Python / Numpy users
+.lightblue[*For Python / Numpy users*]
   - xarray handles n-dimensional arrays with labels (dimension names,
     coordinates) and metadata.
 
-For Python / Pandas users
+.lightblue[*For Python / Pandas users*]
   - xarray is a powerful, pandas-like toolkit for analytics on multi-dimensional arrays.
 
-For scientists familar with netCDF
+.lightblue[*For scientists familar with the netCDF format*]
   - xarray provides an in-memory representation of a netCDF file with a high level Python API.
 
-For scientists working with big datasets
+.lightblue[*For scientists working with big datasets*]
   - xarray supports out-of-core computing (using Dask).
 
 
