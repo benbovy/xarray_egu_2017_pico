@@ -1,6 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
-@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+/*@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
+use local fonts instead (except for Roboto Mono: font weight issue when using
+local font and export to PDF using DeckTape)
+*/
 
 body { font-family: 'Droid Sans'; }
 
@@ -13,11 +17,27 @@ h1, h2, h3 {
 
 .remark-code, .remark-inline-code {
 	font-family: 'Roboto Mono';
-	font-size: 13px;
+}
+
+.remark-code {
+	font-size: 14px;
+	color: #64748c;
+}
+
+.remark-inline-code {
+	font-size: 17px;
+}
+
+.python {
+	background-color: #f4f4f4 !important;
 }
 
 .remark-slide-content {
 	  padding:3.7em 4em 2em 4em !important;
+}
+
+pre {
+	margin: 8px 0;
 }
 
 div.header-wrap {
@@ -60,7 +80,7 @@ div.authors {
     text-align: center;
     font-size: 13px;
 		margin-top: 2px;
-		color: #e3e9f1;
+		color: #e9eff7;
 }
 
 div.affiliations {
@@ -80,11 +100,9 @@ div.footer-logos {
 }
 
 div.footer-logos span {
-	  display: inline-block;
-	  height: 80%;
-		vertical-align: middle;
+		vertical-align: bottom;
 		text-align: left;
-    margin: 0 10px 0 0;
+    margin-right: 10px;
 		font-size: 11px;
 		color: #64748c;
 }
@@ -123,4 +141,8 @@ div.footer-wrap ul li {
 
 .lightblue {
 	  color: #64748c;
+}
+
+.orange {
+	  color: #e4710e;
 }

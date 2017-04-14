@@ -3,7 +3,8 @@
   <head>
     <title>Xarray (EGU 2017 PICO)</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="pico_slides_remark.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/pico_slides_remark.css"/>
   </head>
   <body>
     <textarea id="source">
@@ -24,14 +25,19 @@ layout: true
     <div class='logo-right'></div>
 </div>
 <div class="footer-logos">
-    <span>EGU Vienna 04-2017</span>
-    <img src="figs/pydata-logo.png" width="65px"/>
-    <img src="figs/numfocus-logo.png" width="65px"/>
+    <span>EGU Vienna 04-2017 (PICO)</span>
+    <!--<img src="figs/pydata-logo.png" width="65px"/>
+    <img src="figs/numfocus-logo.png" width="65px"/>-->
 </div>
 <div class="footer-wrap">
     <ul>
-        <li class='current-nav'>outline</li>
-        <li>dataset</li>
+        <li class='current-nav'>summary</li>
+        <li>data structures</li>
+        <li>indexing</li>
+        <li>aggregation</li>
+        <li>arithmetics</li>
+        <li>plotting</li>
+        <li>out-of-core</li>
     </ul>
 </div>
 
@@ -39,46 +45,206 @@ layout: true
 
 # What is xarray?
 
-.lightblue[*For Python / Numpy users*]
-  - xarray handles n-dimensional arrays with labels (dimension names,
+.orange[For Python / Numpy users]
+  - xarray handles N-dimensional arrays with labels (dimension names &
     coordinates) and metadata.
 
-.lightblue[*For Python / Pandas users*]
-  - xarray is a powerful, pandas-like toolkit for analytics on multi-dimensional arrays.
+.orange[For Python / Pandas users]
+  - xarray is a powerful, pandas-like toolkit for analytics on
+    multi-dimensional arrays.
 
-.lightblue[*For scientists familar with the netCDF format*]
-  - xarray provides an in-memory representation of a netCDF file with a high level Python API.
+.orange[For scientists familar with the netCDF format]
+  - xarray implements the netCDF data model with a high level Python API.
 
-.lightblue[*For scientists working with big datasets*]
-  - xarray supports out-of-core computing (using Dask).
-
+.orange[For scientists working with big datasets]
+  - xarray (with dask) supports efficient, out-of-core computing for datasets
+    that don't fit in memory.
 
 ---
 
-# DataArray
+# numpy.array
+
+```python
+>>> import numpy as np
+>>> a = np.array([[1, 3, 9], [2, 8, 4]])
+>>> a
+```
+```
+array([[1, 3, 9],
+       [2, 8, 4]])
+```
+```python
+>>> a[1, 2]   # get the value at 2nd row and 3rd column
+```
+```
+4
+```
+```python
+>>> a.mean(axis=0)   # compute the mean column-wise
+```
+```
+array([1.5,  5.5,  6.5])
+```
+
+<br/>
+Not well supported by numpy:
+- array dimensions and indexes often have a meaning, e.g., latitude /
+  longitude and their coordinates.
+
+---
+
+# xarray.DataArray
 
 ```python
 >>> import xarray as xr
->>> da = xr.DataArray(a, dims=['lat', 'lon'],
-                      coords={'lon':[11, 12, 13], 'lat':[1, 2]})
+>>> da = xr.DataArray(a, dims=['latitude', 'longitude'],
+                      coords={'longitude':[11, 12, 13], 'latitude':[1, 2]})
 >>> da
 ```
 ```
-<xarray.DataArray (lat: 2, lon: 3)>
+<xarray.DataArray (latitude: 2, longitude: 3)>
 array([[1, 3, 9],
        [2, 8, 4]])
 Coordinates:
-  * lon      (lon) int64 11 12 13
-  * lat      (lat) int64 1 2
+  * longitude    (longitude) int64 11 12 13
+  * latitude     (latitude) int64 1 2
+```
+```python
+>>> da.sel(longitude=13, latitude=2)   # easier to work with coordinate values!
+```
+```
+<xarray.DataArray ()>
+array(4)
+Coordinates:
+    longitude    int64 13
+    latitude     int64 2
+```
+```python
+>>> da.mean(dim='latitude')    # easier to remember dimension names!
+```
+```
+<xarray.DataArray (longitude: 3)>
+array([ 1.5,  5.5,  6.5])
+Coordinates:
+  * longitude    (longitude) int64 11 12 13
 ```
 
+---
+
+# xarray.Dataset
+
+A collection of `xarray.DataArray`, a netCDF file...
+
+```python
+>>> ds = xr.open_dataset('ERA-Int-MonthlyAvg-4D-TUVWZ.nc')
+>>> ds
+```
+```
+<xarray.Dataset>
+Dimensions:    (latitude: 241, level: 15, longitude: 480, month: 12)
+Coordinates:
+  * latitude   (latitude) float32 90.0 89.25 88.5 87.75 87.0 ...
+  * level      (level) int32 50 100 150 200 300 400 500 600 ...
+  * longitude  (longitude) float32 -180.0 -179.25 -178.5 ...
+  * month      (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    u          (month, level, latitude, longitude) float64 10.38 ...
+    v          (month, level, latitude, longitude) float64 5.594 ...
+    w          (month, level, latitude, longitude) float64 -0.0003052 ...
+    z          (month, level, latitude, longitude) float64 1.888e+05 ...
+    t          (month, level, latitude, longitude) float64 201.1 ...
+Attributes:
+    Conventions: CF-1.0
+    Info: Monthly ERA-Interim data.
+```
+
+---
+
+# Powerful analytics
+
+- Advanced selection
+
+```python
+ds.sel(latitude=47.26, method='nearest')  # no need to provide exact coordinate values
+```
+
+- Aggregation
+
+```python
+ds.mean(dim=['month', 'longitude'])
+```
+
+- Arithmetics
+
+```python
+ds1 + ds2   # supports automatic broadcasting and alignment!
+```
+
+<img src="figs/broadcast.png" style="margin-right: 40px;" width="400px"/>
+<img src="figs/align.png" width="300px"/>
+
+---
+
+# Powerful analytics (2)
+
+- Plotting
+
+```python
+import cartopy.crs as ccrs
+ax = plt.axes(projection=ccrs.Robinson())
+ds.z.sel(level=1000, month=8).plot(ax=ax, transform=ccrs.PlateCarree());
+ax.coastlines();
+```
+
+<img src="figs/plot-map.png" width="530px"/>
+
+---
+
+# Powerful analytics (3)
+
+- Out-of-core computing
+
+```python
+big_ds = xr.open_mfdataset('data*.nc') # lazy loading of many netCDF files
+                                       # (>1GB) into a single xarray.Dataset
+
+big_ds.mean(dim=['longitude', 'latitude'])  # lazy computation
+
+big_ds.load()   # triggers efficient, multi-core computation (using dask)
+```
+
+- ... and more!
+
+---
+
+# xarray
+
+- Open source
+
+- Very good integration with other Python libraries for scientific
+  computing (SciPy / PyData Stack)
+
+- Documentation: http://xarray.pydata.org
+
+- Repository: https://github.com/pydata/xarray
+
+- 60 contributors (still growing)
+
+- Latest release: v0.9.2 (02.04.2017)
+
+- Umbrellas (no funding): Python for Data & NumFOCUS
+
+<img src="figs/pydata-logo.png" style="margin-left: 45px;" width="150px"/>
+<img src="figs/numfocus-logo.png" style="margin-left: 45px;" width="150px"/>
+
+
     </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    <script src="static/js/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create({
           slideNumberFormat: '',
-          highlightStyle: 'github',
+          highlightStyle: 'github-gist',
           ratio: '4:3'
       });
     </script>
