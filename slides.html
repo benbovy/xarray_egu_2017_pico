@@ -33,11 +33,7 @@ layout: true
     <ul>
         <li class='current-nav'>summary</li>
         <li>data structures</li>
-        <li>indexing</li>
-        <li>aggregation</li>
-        <li>arithmetics</li>
-        <li>plotting</li>
-        <li>out-of-core</li>
+        <li>data analytics</li>
     </ul>
 </div>
 
@@ -59,6 +55,42 @@ layout: true
 .orange[For scientists working with big datasets]
   - xarray (with dask) supports efficient, out-of-core computing for datasets
     that don't fit in memory.
+
+---
+
+# What is xarray?
+
+If you are dealing with data that...
+  - is multi-dimensional ;
+  - is labelled ;
+  - has (lots of) metadata ;
+  - is sometimes (very) large ;
+
+<img src="figs/dataset.png" style="margin: 20px 90px;" width="600px"/>
+
+...then you may find xarray very useful!
+
+---
+
+# xarray
+
+- Open source
+
+- Very good integration with other Python libraries for scientific
+  computing (SciPy / PyData Stack)
+
+- Documentation: http://xarray.pydata.org
+
+- Repository: https://github.com/pydata/xarray
+
+- 60 contributors (still growing)
+
+- Latest release: v0.9.2 (02.04.2017)
+
+- Umbrellas (no funding): Python for Data & NumFOCUS
+
+<img src="figs/pydata-logo.png" style="margin-left: 45px;" width="150px"/>
+<img src="figs/numfocus-logo.png" style="margin-left: 45px;" width="150px"/>
 
 ---
 
@@ -214,28 +246,6 @@ big_ds.load()   # triggers efficient, multi-core computation (using dask)
 ```
 
 - ... and more!
-
----
-
-# xarray
-
-- Open source
-
-- Very good integration with other Python libraries for scientific
-  computing (SciPy / PyData Stack)
-
-- Documentation: http://xarray.pydata.org
-
-- Repository: https://github.com/pydata/xarray
-
-- 60 contributors (still growing)
-
-- Latest release: v0.9.2 (02.04.2017)
-
-- Umbrellas (no funding): Python for Data & NumFOCUS
-
-<img src="figs/pydata-logo.png" style="margin-left: 45px;" width="150px"/>
-<img src="figs/numfocus-logo.png" style="margin-left: 45px;" width="150px"/>
 
 
     </textarea>
