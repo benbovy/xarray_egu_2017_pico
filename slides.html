@@ -34,6 +34,8 @@ layout: true
         <li class='current-nav'>summary</li>
         <li>data structures</li>
         <li>data analytics</li>
+        <li>graphics</li>
+        <li>big data</li>
     </ul>
 </div>
 
@@ -219,7 +221,27 @@ ds1 + ds2   # supports automatic broadcasting and alignment!
 
 # Powerful analytics (2)
 
-- Plotting
+- Groupby
+
+```python
+ds = xr.open_dataset('ERA-Int-Monthly-2mTemp.nc')
+ds.groupby('time.month').mean(dim='time')   # monthly averages
+```
+```
+<xarray.Dataset>
+Dimensions:    (latitude: 241, longitude: 480, month: 12)
+Coordinates:
+  * latitude   (latitude) float32 90.0 89.25 88.5 87.75 87.0 86.25 85.5 ...
+  * longitude  (longitude) float32 -180.0 -179.25 -178.5 -177.75 -177.0 ...
+  * month      (month) int64 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    t2m        (month, latitude, longitude) float64 245.8 245.8 245.8 245.8 ...
+```
+
+
+---
+
+# Plotting: maps
 
 ```python
 import cartopy.crs as ccrs
@@ -232,9 +254,22 @@ ax.coastlines();
 
 ---
 
-# Powerful analytics (3)
+# Plotting (2): facet plots
 
-- Out-of-core computing
+```python
+ds = xr.open_dataset('ERA-Int-Monthly-2mTemp.nc')
+t2 = ds.t2m.groupby('time.season').mean(dim='time')
+p = t2.plot(x='longitude', y='latitude', col='season', col_wrap=2, figsize=(10, 5),
+            transform=ccrs.PlateCarree(), subplot_kws={'projection': ccrs.PlateCarree()});
+for ax in p.axes.flat:
+    ax.coastlines()
+```
+
+<img src="figs/facet-plot.png" width="600px"/>
+
+---
+
+# Out-of-core computing
 
 ```python
 big_ds = xr.open_mfdataset('data*.nc') # lazy loading of many netCDF files
@@ -245,7 +280,54 @@ big_ds.mean(dim=['longitude', 'latitude'])  # lazy computation
 big_ds.load()   # triggers efficient, multi-core computation (using dask)
 ```
 
-- ... and more!
+- Dask: divide large arrays in smaller pieces (*chunks*) fitting in memory
+
+<img src="figs/dask_array.png" width="260px"/>
+
+---
+
+# Out-of-core computing (2)
+
+- Lazy computations
+
+```python
+# Compute the monthly averages on chunks
+out = nc.t2m.chunk().groupby('time.month').mean(dim='time')
+# The computations are done lazily (i.e. not until requested)
+out.data
+```
+```
+dask.array<transpo..., shape=(12, 241, 480), dtype=float64, chunksize=(1, 241, 480)>
+```
+
+```python
+# Make a graph of the deferred computations
+from dask.dot import dot_graph
+dot_graph(out.data.dask)
+```
+<img src="figs/dask_graph.png" width="400px"/>
+
+---
+
+# xarray
+
+- Open source
+
+- Very good integration with other Python libraries for scientific
+  computing (SciPy / PyData Stack)
+
+- Documentation: http://xarray.pydata.org
+
+- Repository: https://github.com/pydata/xarray
+
+- 60 contributors (still growing)
+
+- Latest release: v0.9.2 (02.04.2017)
+
+- Umbrellas (no funding): Python for Data & NumFOCUS
+
+<img src="figs/pydata-logo.png" style="margin-left: 45px;" width="150px"/>
+<img src="figs/numfocus-logo.png" style="margin-left: 45px;" width="150px"/>
 
 
     </textarea>
