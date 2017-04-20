@@ -487,7 +487,7 @@ layout: true
 - dask arrays: divide large arrays in smaller pieces ("chunks") fitting in memory
 
 ```python
->>> # split the array into chunks of 100 elements on the time dimension
+>>> # split the array into chunks of max. 100 elements on the time dimension
 >>> t2m_dask = ds.t2m.chunk({'time': 100})
 >>> t2m_dask.data       # returns a dask.array instead of a numpy.array
 ```
@@ -495,7 +495,7 @@ layout: true
 dask.array<xarray-<this-array>, shape=(457, 241, 480), chunksize=(100, 241, 480)>
 ```
 
-<img src="figs/dask_array.png" width="260px"/>
+<img src="figs/dask-array.png" style="margin-left: 230px;" width="260px"/>
 
 ---
 
@@ -583,6 +583,9 @@ layout: true
 - Import/export from/to `pandas.DataFrame` or `pandas.Series`
 
 - Multi-index coordinates support (stack / unstack)
+
+- Easily extend xarray with domain specific functionality, e.g., signal
+  processing, image processing, GCM output analytics, GIS processing...
 
 ---
 
