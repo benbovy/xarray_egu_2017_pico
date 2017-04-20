@@ -1,13 +1,11 @@
-# Slides for xarray PICO presentation at EGU Vienna 2017
+# xarray PICO presentation at EGU Vienna 2017
 
-(work in progress)
+## Slides
 
-Based on [remark](https://github.com/gnab/remark).
-
-Presentation layout inspired from this
-[latex presentation](https://github.com/snowtechblog/pico-latex-presentation).
-
-PDF created using [decktape](https://github.com/astefanutti/decktape).
+- based on [remark](https://github.com/gnab/remark).
+- layout inspired from this
+  [latex presentation](https://github.com/snowtechblog/pico-latex-presentation).
+- PDF created using [decktape](https://github.com/astefanutti/decktape).
 
 ## License
 
