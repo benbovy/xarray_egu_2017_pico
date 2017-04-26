@@ -381,6 +381,31 @@ Coordinates:
 
 ---
 
+# Analytics
+
+- More advanced example using both numpy.array and xarray objects
+
+```python
+>>> # weighted average on a spherical Earth
+>>> weight = np.cos(np.deg2rad(ds.latitude))
+>>> weight = weight / weight.sum()
+>>> zonal_avg = ds.mean(dim='longitude')
+>>> global_avg = (zonal_avg * weight).sum(dim='latitude')
+```
+```
+<xarray.Dataset>
+Dimensions:  (time: 457)
+Coordinates:
+  * time     (time) datetime64[ns] 1979-01-01 1979-02-01 1979-03-01 ...
+Data variables:
+    sp       (time) float64 9.852e+04 9.853e+04 9.853e+04 9.853e+04 ...
+    u10      (time) float64 -0.2679 -0.3043 -0.3953 -0.3146 -0.2558 -0.1829 ...
+    v10      (time) float64 -0.3623 -0.2423 -0.1939 -0.007289 0.2645 0.5457 ...
+    t2m      (time) float64 285.5 285.4 286.3 287.2 288.2 289.0 289.1 289.1 ...
+```
+
+---
+
 layout: true
 <div class="header-wrap">
     <div class='logo-left'><img src="figs/xarray-logo-notext.png" width="65px"/></div>
