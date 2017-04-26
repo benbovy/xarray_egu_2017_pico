@@ -109,6 +109,7 @@ div.footer-logos span {
 
 div.footer-logos img {
     margin-right: 10px;
+		vertical-align: bottom;
 }
 
 div.footer-wrap {
